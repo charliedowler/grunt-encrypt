@@ -1,0 +1,44 @@
+{
+  "name": "grunt-encrypt",
+  "description": "The best Grunt plugin ever.",
+  "version": "0.0.1",
+  "homepage": "https://github.com/charliedowler/grunt-encrypt",
+  "author": {
+    "name": "charliedowler",
+    "url": "https://github.com/charliedowler/"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git://github.com/charliedowler/grunt-encrypt.git"
+  },
+  "bugs": {
+    "url": "https://github.com/charliedowler/grunt-encrypt/issues"
+  },
+  "licenses": [
+    {
+      "type": "MIT",
+      "url": "https://github.com/charliedowler/grunt-encrypt/blob/master/LICENSE-MIT"
+    }
+  ],
+  "engines": {
+    "node": ">= 0.8.0"
+  },
+  "scripts": {
+    "test": "grunt test"
+  },
+  "dependencies": {
+    "cf-encrypt": "~0.0.4"
+  },
+  "devDependencies": {
+    "grunt-contrib-jshint": "^0.9.2",
+    "grunt-contrib-clean": "^0.5.0",
+    "grunt-contrib-nodeunit": "^0.3.3",
+    "grunt": "~0.4.5"
+  },
+  "peerDependencies": {
+    "grunt": "~0.4.5"
+  },
+  "keywords": [
+    "gruntplugin"
+  ]
+}
