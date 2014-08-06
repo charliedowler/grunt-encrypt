@@ -16,10 +16,7 @@ module.exports = function(grunt) {
 
   grunt.registerMultiTask('encrypt', 'The best Grunt plugin ever.', function() {
     // Merge task-specific and/or target-specific options with these defaults.
-    var options = this.options({
-      punctuation: '.',
-      separator: ', '
-    });
+    var options = this.options();
     if (!options.key) {
       grunt.fail.warn('Missing key property.');
     }
@@ -33,20 +30,17 @@ module.exports = function(grunt) {
           return false;
         } else {
           var filename = path.basename(filepath);
+          var newFilename = (grunt.file.isDir(options.dest) ? [filepath, 'encrypted'].join('.') : (options.ext) ? [options.dest, options.ext].join('.') : options.dest);
           var contents = encrypt[(options.decrypt) ? 'decrypt' : 'encrypt'](options.key, grunt.file.read(filepath), 'hex');
-          grunt.file.write(path.join(options.dest, filename) || [filepath, 'encrypted'].join('.'), contents);
+          if (options.decrypt) {
+            var ext = filepath.split('.');
+            ext = ext[ext.length - 1];
+            newFilename = newFilename.split('.' + ext).join('');
+          }
+          grunt.file.write(newFilename, contents);
           return true;
         }
-      }).map(function(filepath) {
-        // Read file source.
-        return grunt.file.read(filepath);
-      }).join(grunt.util.normalizelf(options.separator));
-
-      // Handle options.
-      src += options.punctuation;
-
-      // Write the destination file.
-      grunt.file.write(f.dest, src);
+      });
 
       // Print a success message.
       grunt.log.writeln('File "' + f.dest + '" created.');

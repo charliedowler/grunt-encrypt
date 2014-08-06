@@ -1,6 +1,6 @@
 # grunt-encrypt
 
-> The best Grunt plugin ever.
+> Encrypt your files with Grunt
 
 ## Getting Started
 This plugin requires Grunt `~0.4.5`
@@ -26,59 +26,82 @@ In your project's Gruntfile, add a section named `encrypt` to the data object pa
 grunt.initConfig({
   encrypt: {
     options: {
-      // Task-specific options go here.
+      key: 'superSecretKey',
+      dest: 'output/encrypted/'
     },
-    your_target: {
-      // Target-specific file lists and/or options go here.
-    },
+    files: {
+        'someFiles': ['path/to/files']
+    }
   },
 });
 ```
 
 ### Options
 
-#### options.separator
+#### options.key
 Type: `String`
-Default value: `',  '`
+Default value: `null`
 
-A string value that is used to do something with whatever.
+A string value used to encrypt a file
 
-#### options.punctuation
+#### options.dest
 Type: `String`
-Default value: `'.'`
 
-A string value that is used to do something else with whatever else.
+A string to the output directory, defaults to the source file path
+
+#### options.ext
+Type: `String`
+Default value: `null`
+
+A string to set the file extension for the encrypted file.
+
+#### files
+Type: `Object`
+
+An object containing a map of files. See below for examples.
 
 ### Usage Examples
 
-#### Default Options
-In this example, the default options are used to do something with whatever. So if the `testing` file has the content `Testing` and the `123` file had the content `1 2 3`, the generated result would be `Testing, 1 2 3.`
+#### Encrypt options
+In this example we are encrypting some configuration files and outputing to the same directory. You can set the output directory by passing the `dest` option, you can assign the encryption key by passing the `key` option. By passing the `ext` option the input files become `ftppass.json.encrypted` and `sshKey.encrypted`
 
 ```js
 grunt.initConfig({
   encrypt: {
-    options: {},
-    files: {
-      'dest/default_options': ['src/testing', 'src/123'],
-    },
-  },
+    encryptConfigFiles: {
+        options: {
+            key: process.env.encryptionKey,
+            dest: './',
+            ext: 'encrypted',
+            decrypt: true
+        },
+        files: {
+            'configFiles': ['./ftppass.json', './sshKey'],
+        }
+    }
+  }
 });
 ```
 
-#### Custom Options
-In this example, custom options are used to do something else with whatever else. So if the `testing` file has the content `Testing` and the `123` file had the content `1 2 3`, the generated result in this case would be `Testing: 1 2 3 !!!`
+#### Decrypt Options
+In this example we are decrypting some configuration files, we are providing the key through environment variables. You can decrypt files by passing the `decrypt` option to the task, If the `dest` option is a directory it will generate the new file with the existing name.
+
+The decrypt option removes the last extension in the filename, for example if you encrypt a file with the filename as  `passwords.json` and you don't provide the `ext` option, `.json` will be removed.
 
 ```js
 grunt.initConfig({
   encrypt: {
-    options: {
-      separator: ': ',
-      punctuation: ' !!!',
-    },
-    files: {
-      'dest/default_options': ['src/testing', 'src/123'],
-    },
-  },
+    decryptConfigFiles: {
+        options: {
+            key: process.env.encryptionKey,
+            dest: './',
+            decrypt: true
+        },
+        files: {
+            'configFiles': ['./ftppass.encrypted', './sshKey.encrypted'],
+        }
+    }
+  }
 });
 ```
 
