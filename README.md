@@ -1,4 +1,4 @@
-# grunt-encrypt
+# grunt-encrypt [![Build Status][travis-image]][travis-url]
 
 > Encrypt your files with Grunt
 
@@ -110,3 +110,6 @@ In lieu of a formal styleguide, take care to maintain the existing coding style.
 
 ## Release History
 - 2014-08-06 v0.1.0 Initial release
+
+[travis-url]: http://travis-ci.org/charliedowler/grunt-encrypt
+[travis-image]: https://secure.travis-ci.org/charliedowler/grunt-encrypt.png?branch=master
