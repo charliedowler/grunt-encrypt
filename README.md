@@ -72,8 +72,7 @@ grunt.initConfig({
         options: {
             key: process.env.encryptionKey,
             dest: './',
-            ext: 'encrypted',
-            decrypt: true
+            ext: 'encrypted'
         },
         files: {
             'configFiles': ['./ftppass.json', './sshKey'],
