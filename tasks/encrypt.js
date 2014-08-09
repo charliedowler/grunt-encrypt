@@ -9,7 +9,7 @@
 'use strict';
 
 module.exports = function(grunt) {
-  var encrypt = require('cf-encrypt');
+  var crypto = require('crypto');
   var path = require('path');
   // Please see the Grunt documentation for more information regarding task
   // creation: http://gruntjs.com/creating-tasks
@@ -20,6 +20,8 @@ module.exports = function(grunt) {
     if (!options.key) {
       grunt.fail.warn('Missing key property.');
     }
+    var key = options.key;
+
     // Iterate over all specified file groups.
     this.files.forEach(function(f) {
       // Concat specified files.
@@ -31,8 +33,17 @@ module.exports = function(grunt) {
         } else {
           var filename = path.basename(filepath);
           var newFilename = (grunt.file.isDir(options.dest) ? [filepath, 'encrypted'].join('.') : (options.ext) ? [options.dest, options.ext].join('.') : options.dest);
-          var contents = encrypt[(options.decrypt) ? 'decrypt' : 'encrypt'](options.key, grunt.file.read(filepath), 'hex');
-          if (options.decrypt) {
+          var contents = grunt.file.read(filepath);
+
+          if (!options.decrypt) {
+            var cipher = crypto.createCipher('aes-256-cbc', key)
+            cipher.update(contents, 'utf8', 'base64');
+            contents = cipher.final('base64')
+          }
+          else {
+            var decipher = crypto.createDecipher('aes-256-cbc', key);
+            decipher.update(contents, 'base64', 'utf8');
+            contents = decipher.final('utf8');
             var ext = filepath.split('.');
             ext = ext[ext.length - 1];
             newFilename = newFilename.split('.' + ext).join('');

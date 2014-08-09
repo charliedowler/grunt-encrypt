@@ -23,13 +23,7 @@ var grunt = require('grunt');
 */
 
 exports.encrypt = {
-  setUp: function(done) {
-    // setup here if necessary
-    done();
-  },
   encrypt: function(test) {
-    test.expect(1);
-
     var actual = grunt.file.read('test/tmp/encrypted.encrypted');
     var expected = grunt.file.read('test/expected/123');
     test.equal(actual, expected, 'should describe what the default behavior is.');
@@ -37,8 +31,6 @@ exports.encrypt = {
     test.done();
   },
   decrypt: function(test) {
-    test.expect(1);
-
     var actual = grunt.file.read('test/tmp/decrypted');
     var expected = grunt.file.read('test/fixtures/123');
     test.equal(actual, expected, 'should describe what the default behavior is.');
