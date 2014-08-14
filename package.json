@@ -9,7 +9,8 @@
   },
   "repository": {
     "type": "git",
-    "url": "git://github.com/charliedowler/grunt-encrypt.git"
+    "url": "git://github.com/charliedowler/grunt-encrypt.git",
+    "job": "https://api.travis-ci.org/repositories/charliedowler/grunt-encrypt"
   },
   "bugs": {
     "url": "https://github.com/charliedowler/grunt-encrypt/issues"
