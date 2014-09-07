@@ -1,4 +1,4 @@
-# grunt-encrypt [![Build Status][travis-image]][travis-url]
+# grunt-encrypt [![NPM version][npm-image]][npm-url] [![Build Status][travis-image]][travis-url] [![Dependency Status][depstat-image]][depstat-url]
 
 > Encrypt your files with Grunt
 
@@ -108,7 +108,14 @@ grunt.initConfig({
 In lieu of a formal styleguide, take care to maintain the existing coding style. Add unit tests for any new or changed functionality. Lint and test your code using [Grunt](http://gruntjs.com/).
 
 ## Release History
+- 2014-08-12 v0.2.0 Switched to crypto
 - 2014-08-06 v0.1.0 Initial release
+
+[npm-url]: https://npmjs.org/package/grunt-encrypt
+[npm-image]: https://badge.fury.io/js/grunt-encrypt.png
 
 [travis-url]: http://travis-ci.org/charliedowler/grunt-encrypt
 [travis-image]: https://secure.travis-ci.org/charliedowler/grunt-encrypt.png?branch=master
+
+[depstat-url]: https://david-dm.org/charliedowler/grunt-encrypt
+[depstat-image]: https://david-dm.org/charliedowler/grunt-encrypt.png
